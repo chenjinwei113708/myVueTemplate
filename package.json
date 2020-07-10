@@ -8,7 +8,8 @@
     "build": "vue-cli-service build",
     "server": "nodemon app/app.js",
     "serverd": "npm run server:dev",
-    "server:dev": "set NODE_ENV=development&& nodemon app/app.js"
+    "serverm": "NODE_ENV=development&& nodemon app/app.js", 
+    "server:dev": "export NODE_ENV=development&& nodemon app/app.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
