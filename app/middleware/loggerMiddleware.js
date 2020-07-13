@@ -1,34 +1,29 @@
+const koa = require('koa');
 const logger = require('../util/log4js')('server-middleware');
-const moment = require('moment');
-
 /**
- * @param {Request} req
- * @param {Response} res
- * @param {*} next
+ * @param {koa.ParameterizedContext} ctx
+ * @param {() => Promise<any>} next
+ * @return {Promise<any>}
  */
-module.exports = function(req, res, next) {
-  if (req.url.indexOf('/static/') === 0 || req.url.indexOf('/api/test') === 0) {
-    logger.debug(`request: ${req.method} ${req.url}`);
+module.exports = async function(ctx, next) {
+  if (ctx.path.indexOf('/static/') === 0 ||  /\/graphql$/g.test(ctx.headers['referer']) || ctx.path.indexOf('/api/test') === 0) {
+    console.log(`request: ${ctx.method} ${ctx.path}`);
     return next();
   }
-  if (req.url.indexOf('/api/') === -1) {
-    logger.debug(`request: ${req.method} ${req.url}`);
+  if (ctx.path.indexOf('/api/') === -1) {
+    console.log(`request: ${ctx.method} ${ctx.path}`);
     return next();
   }
-  logger.info("====================request info====================");
-  try {
-    let ip = ((
-      req.headers['x-forwarded-for'] ||
-      req.headers['x-forward-for'] ||
-      req.connection.remoteAddress ||
-      req.socket.remoteAddress ||
-      req.connection.socket.remoteAddress ||
-      req.ip || ''
-    )
-      .match(/\d+\.\d+\.\d+\.\d+/) || [])[0] || '';
-    logger.info('ip:', ip);
-  } catch (e) {}
-  logger.info('request: ', req.method, req.url);
-  logger.info('user-agent: ' + req.headers['user-agent']);
+  logger.info("====================request info====================")
+  logger.info('request: ', ctx.method, ctx.path);
+  logger.info('username: ', ctx.cookies.get('z_username'));
+  logger.info('ip: ', ctx.ip);
+  logger.info('referer: ',ctx.headers['referer']);
+  logger.info('user-agent: ' + ctx.headers['user-agent']);
+  if (ctx.method.toLowerCase() === 'get') {
+    logger.info("query: ", ctx.search);
+  } else if (ctx.path !== '/api/login') {
+    logger.info("body: ", ctx.request.body);
+  }
   return next();
 }
