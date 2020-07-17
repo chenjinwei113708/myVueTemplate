@@ -1,17 +1,20 @@
 const koa = require('koa');
 const logger = require('../util/log4js')('server-middleware');
+
+const whiteList = ['/api/test', '/health'];
+
 /**
  * @param {koa.ParameterizedContext} ctx
  * @param {() => Promise<any>} next
  * @return {Promise<any>}
  */
 module.exports = async function(ctx, next) {
-  if (ctx.path.indexOf('/static/') === 0 ||  /\/graphql$/g.test(ctx.headers['referer']) || ctx.path.indexOf('/api/test') === 0) {
-    console.log(`request: ${ctx.method} ${ctx.path}`);
+  if (ctx.path.indexOf('/static/') === 0 || /\/graphql$/g.test(ctx.headers['referer']) || (~whiteList.indexOf(ctx.url))) {
+    // console.log(`request: ${ctx.method} ${ctx.path}`);
     return next();
   }
   if (ctx.path.indexOf('/api/') === -1) {
-    console.log(`request: ${ctx.method} ${ctx.path}`);
+    // console.log(`request: ${ctx.method} ${ctx.path}`);
     return next();
   }
   logger.info("====================request info====================")

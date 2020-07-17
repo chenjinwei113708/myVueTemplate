@@ -3,7 +3,7 @@ const koa = require('koa');
 const Util = require("../util/util"); //用来返回抽取的
 const logger = require("../util/log4js")("tokenAuth");
 
-const whiteList = ['/api/login', '/api/logout', '/api/test'];
+const whiteList = ['/api/login', '/api/logout', '/api/test', '/health'];
 
 // if (process.env.NODE_ENV === "development") {
 //   whiteList.push('/api/upload');
