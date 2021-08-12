@@ -8,13 +8,12 @@
     "build": "vue-cli-service build",
     "server": "nodemon app/app.js",
     "serverd": "npm run server:dev",
-    "serverm": "NODE_ENV=development&& nodemon app/app.js", 
-    "server:dev": "export NODE_ENV=development&& nodemon app/app.js"
+    "server:dev": "cross-env NODE_ENV=development nodemon app/app.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
-    "cross-env": "^5.2.0",
+    "cross-env": "^7.0.3",
     "koa": "^2.11.0",
     "koa-body": "^4.1.1",
     "koa-router": "^8.0.8",
