@@ -6,5 +6,14 @@ export default {
       url: '/api/test',
       method: 'GET',
     });
+  },
+
+  login () {
+    return axios({
+      url: '/api/login',
+      method: 'GET',
+    });
   }
+
+
 }

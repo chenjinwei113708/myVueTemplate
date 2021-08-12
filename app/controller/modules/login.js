@@ -6,11 +6,11 @@ module.exports = {
    * @param {koa.ParameterizedContext} ctx
    * @param {() => Promise<any>} next
    */
-  async test (ctx) {
+  async login (ctx) {
     Util.resHandler(ctx, {
       isSuccess: true,
       data: {
-        msg: 'oktest'
+        msg: 'oklogin'
       }
     });
   }

@@ -1,5 +1,5 @@
 <template>
-  <div>Home</div>
+  <div>home</div>
 </template>
 
 <script>
@@ -9,13 +9,15 @@ export default {
   name: 'home',
 
   mounted () {
-    // this.test();
+    this.test();
   },
 
   methods: {
     async test () {
       const resData = await TestApi.test();
+      const reslogin = await TestApi.login();
       console.log(resData);
+      console.log(reslogin);
     }
   }
 }

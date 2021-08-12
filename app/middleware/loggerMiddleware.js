@@ -1,7 +1,7 @@
 const koa = require('koa');
 const logger = require('../util/log4js')('server-middleware');
 
-const whiteList = ['/api/test', '/health'];
+const whiteList = ['/api/login','/api/test', '/health'];
 
 /**
  * @param {koa.ParameterizedContext} ctx

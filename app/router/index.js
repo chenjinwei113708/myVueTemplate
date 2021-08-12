@@ -11,7 +11,7 @@ const getBuildFile = (filename) => {
 const router = new Router();
 
 router.get('/api/test', ctrl.test.test);
-
+router.get('/api/login',ctrl.login.login);
 
 // 放在最后
 router.get("*", (ctx, next) => {
